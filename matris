@@ -1,0 +1,66 @@
+def adalardenizi(matris):
+
+    m = len(matris) # Matrisin boyutları alınır
+
+    n = len(matris[0])
+
+ 
+
+    adalar = 0 # Başlangıçta adaların sayısı 0 olarak tanımlanır
+    def ada(i, j): # İç fonksiyon tanımlanır. Verilen koordinatta adanın başlangıcını tespit eder ve tüm adayı doldurur.
+
+        # Eğer verilen koordinat matrisin sınırlarının dışındaysa veya koordinattaki değer 0 ise fonksiyondan çıkılır
+
+        if i < 0 or i >= m or j < 0 or j >= n or matris[i][j] == 0:
+
+            return
+
+        # Verilen koordinattaki değer 1 ise, o koordinatın ve komşu koordinatların değeri 0 yapılır
+
+        matris[i][j] = 0
+
+        ada(i - 1, j) # Üst komşu
+
+        ada(i + 1, j) # Alt komşu
+
+        ada(i, j - 1) # Sol komşu
+
+        ada(i, j + 1) # Sağ komşu
+
+ 
+
+    # Matrisin tüm elemanları için gezilir
+
+    for i in range(m):
+
+        for j in range(n):
+
+            # Eğer verilen koordinatın değeri 1 ise, yeni bir ada başlangıcı tespit edilir
+
+            if matris[i][j] == 1:        
+
+                adalar += 1 # Ada sayısı arttırılır              
+
+                ada(i, j) # Ada fonksiyonu, adanın tamamını doldurmak üzere çağrılır
+
+ 
+
+  
+
+    return adalar # Toplam adaların sayısı döndürülür
+
+# Örnek matris tanımlanır ve "adalardenizi" fonksiyonu çağrılır
+
+matris = [
+
+    [1, 1, 0, 0, 0],
+
+    [1, 1, 0, 0, 1],
+
+    [1, 1, 0, 1, 1],
+
+    [0, 0, 0, 1, 1]
+
+]
+
+print(adalardenizi(matris)) 
