@@ -1,0 +1,57 @@
+class TreeNode:# TreeNode adlı bir sınıf tanımlanır
+
+    def __init__(self, val=0, left=None, right=None):
+
+        self.val = val # Her düğüm "val" adı verilen bir değer ve sol ve sağ alt düğümlerinin referansları olan "left" ve "right" özelliklerine sahiptir.
+
+        self.left = left
+
+        self.right = right
+
+ 
+
+# is_sum_of_children adlı bir fonksiyon tanımlanır ve bir TreeNode nesnesi alır
+
+def is_sum_of_children(root):
+
+    # root düğümü yoksa, False döndürülür
+
+    if not root:
+
+        return False
+
+ 
+
+    # sum_of_descendants adlı iç fonksiyon tanımlanır ve bir düğüm nesnesi alır
+
+    def sum_of_descendants(node):
+
+        # düğüm yoksa, 0 döndürülür
+
+        if not node:
+
+            return 0
+
+        # düğümün değeri, sol ve sağ alt düğümlerdeki tüm düğüm değerlerinin toplamıyla hesaplanır
+
+        return node.val + sum_of_descendants(node.left) + sum_of_descendants(node.right)
+
+ 
+
+    # root düğümünün sol ve sağ alt düğümlerindeki tüm düğüm değerlerinin toplamı,
+
+    # root düğümünün değerine eşitse, True döndürülür; aksi halde False döndürülür.
+
+    return sum_of_descendants(root.left) + sum_of_descendants(root.right) == root.val
+
+ 
+
+# Örnek bir ağaç oluşturulur ve is_sum_of_children fonksiyonu çağrılır
+
+root = TreeNode(3)
+
+root.left = TreeNode(1)
+
+root.right = TreeNode(2)
+
+print(is_sum_of_children(root))
